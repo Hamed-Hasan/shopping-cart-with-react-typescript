@@ -39,7 +39,7 @@ export function ShoppingCartProvider( { children }: ShoppingCartProviderProps) {
     const openCart = () => setIsOpen(true)
     const closeCart = () => setIsOpen(false)
 
-    function getItemCartQuantity(id: number) {
+    function getItemQuantity(id: number) {
         return cartItems.find(item => item.id === id)?.quantity || 0
     }
     function increaseCartQuantity(id: number) {
@@ -77,7 +77,24 @@ export function ShoppingCartProvider( { children }: ShoppingCartProviderProps) {
             return currItems.filter(item => item.id !== id)
         })
     }
-    
+
+    return (
+        <ShoppingCartContext.Provider
+        value={{
+            getItemQuantity,
+            increaseCartQuantity,
+            decreaseCartQuantity,
+            removeFromCart,
+            openCart,
+            closeCart,
+            cartItems,
+            cartQuantity,
+        }}
+        >
+            {children}
+
+        </ShoppingCartContext.Provider>
+    )
 
 }
 
