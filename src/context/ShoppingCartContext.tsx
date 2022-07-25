@@ -1,4 +1,5 @@
-import { createContext, ReactNode, useState } from 'react';
+import { createContext, ReactNode, useContext, useState } from 'react';
+import { ShoppingCart } from '../components/ShoppingCart';
 import { useLocalStorage } from '../hooks/useLocalStorege';
 
 type ShoppingCartProviderProps  ={
@@ -23,6 +24,11 @@ type ShoppingCartContext ={
 }
 
 const ShoppingCartContext = createContext({} as ShoppingCartContext)
+
+export function useShoppingCart() {
+    return useContext(ShoppingCartContext)
+}
+
 
 export function ShoppingCartProvider( { children }: ShoppingCartProviderProps) {
     const [isOpen, setIsOpen] = useState(false)
@@ -92,7 +98,7 @@ export function ShoppingCartProvider( { children }: ShoppingCartProviderProps) {
         }}
         >
             {children}
-
+            <ShoppingCart isOpen={isOpen}/>
         </ShoppingCartContext.Provider>
     )
 
