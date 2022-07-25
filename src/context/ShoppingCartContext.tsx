@@ -72,6 +72,12 @@ export function ShoppingCartProvider( { children }: ShoppingCartProviderProps) {
             }
         })
     }
+    function removeFromCart(id: number) {
+        setCartItems(currItems => {
+            return currItems.filter(item => item.id !== id)
+        })
+    }
+    
 
 }
 
